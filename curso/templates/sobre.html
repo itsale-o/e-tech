@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block head %}
+{% endblock %}
+
+{% block titulo %}
+    Sobre Nós
+{% endblock %}
+
+{% block content %}
+<section class="centered-main-container sobre-nos">    
+    <div class="sobre-nos-header"> 
+        <div class="sobre-nos-logo-div">
+            <img class="sobre-nos-logo" src="{% static 'img/logo/logo.svg' %}">
+            <img class="sobre-nos-fonte" src="{% static 'img/logo/fonte.svg' %}"> 
+        </div>      
+    </div>
+    
+    <div class="sobre-nos-content">
+        <h1>Sobre Nós</h1>
+        <p>
+            A E-tech é um plataforma que tem como objetivo facilitar o acesso a conteúdos didáticos da área de tecnologia. Proporcionamos conteúdos na
+            área de <a href="#" class="design-span sobre-link">Design Gráfico</a>, <a href="" class="front-span sobre-link">Frontend</a>, 
+            <a href="" class="back-span sobre-link">Backend</a>, <a href="" class="prog-span sobre-link">Programação</a> e <a href="" class="mobile-span sobre-link">Desenvolvimento Mobile</a>.
+            <br>
+            <br>
+            Contamos com os vídeos do youtube com as melhores avaliações e com maior número de visualizações e conteúdos de
+            apoio como quizzes para praticar seu conhecimento. 
+            <br>
+            <br>   
+            Contamos ainda com um fórum de discussões para que os nossos 
+            usuários possam interagir entre si, criando, desta forma, uma rede de comunicação para troca de conhecimento
+            e informação.          
+        </p>
+    </div>
+</section>
+
+<footer class="sobre-nos-footer">
+    <h4>Desenvolvida Por:</h4>
+
+    <a class="link-dev" href="https://github.com/itsale-o">Alessandra Oliveira,</a>
+    <a class="link-dev" href="">Ana Júlia,</a>
+    <a class="link-dev" href="">André Luiz,</a>
+    <a class="link-dev" href="">Felipe Rasera,</a>
+    <a class="link-dev" href="">Jennefer Freires,</a>
+    <a class="link-dev last-item" href="">Rafael Rasera</a>
+</footer> 
+{% endblock %}

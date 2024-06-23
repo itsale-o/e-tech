@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Avalie nosso site
+{% endblock %}
+
+{% block content %}
+<div class="centered-main-container">
+  <h1 class="titulo-principal-avaliacao">Avalie a sua Experiência</h1>
+
+  <form method="post" class="form-avaliacao">
+    {% csrf_token %}
+
+    <section class="avaliacao-cursos">
+      <h2 class="titulo-categoria-avaliacao">Avaliação dos Cursos</h2>
+
+      <div class="avaliacoes avaliacao-design">
+        <h3 class="titulo-avaliacao">Design Gráfico</h3>
+
+        <div class="estrelas">
+          {% for choice in form.design.field.choices %}
+            {% if choice.0 >= 1 and choice.0 <= 5 %}
+                <input class="radio-avaliacao" id="radio{{ choice.0 }}-d" type="radio" name="{{ form.design.name }}" value="{{ choice.0 }}">
+                <label for="radio{{ choice.0 }}-d" class="label-avaliacao">
+                    <img class="star star-outline-d" src="{% static 'img/icons/star-outline.svg' %}" alt="">
+                    <img class="star star-filled-d" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+                </label>
+            {% endif %}
+          {% endfor %}
+        </div>    
+      </div>
+
+      <div class="avaliacoes avaliacao-frontend">
+        <h3 class="titulo-avaliacao">Frontend</h3>
+
+        <div class="estrelas">
+          {% for choice in form.frontend.field.choices %}
+            {% if choice.0 >= 1 and choice.0 <= 5 %} 
+                <input class="radio-avaliacao" id="radio{{ choice.0 }}-fe" type="radio" name="{{ form.frontend.name }}" value="{{ choice.0 }}">
+                <label for="radio{{ choice.0 }}-fe" class="label-avaliacao">
+                    <img class="star star-outline-fe" src="{% static 'img/icons/star-outline.svg' %}" alt="">
+                    <img class="star star-filled-fe" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+                </label>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="avaliacoes avaliacao-backend">
+        <h3 class="titulo-avaliacao">Backend</h3>
+        
+        <div class="estrelas">
+          {% for choice in form.backend.field.choices %}
+            {% if choice.0 >= 1 and choice.0 <= 5 %}
+                <input class="radio-avaliacao" id="radio{{ choice.0 }}-b" type="radio" name="{{ form.backend.name }}" value="{{ choice.0 }}">
+                <label for="radio{{ choice.0 }}-b" class="label-avaliacao">
+                    <img class="star star-outline-b" src="{% static 'img/icons/star-outline.svg' %}" alt="">
+                    <img class="star star-filled-b" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+                </label>
+            {% endif %}
+          {% endfor %}
+        </div>  
+      </div>
+
+      <div class="avaliacoes avaliacao-programacao">
+        <h3 class="titulo-avaliacao">Programação</h3>
+        
+        <div class="estrelas">
+          {% for choice in form.programacao.field.choices %}
+            {% if choice.0 >= 1 and choice.0 <= 5 %}
+                <input class="radio-avaliacao" id="radio{{ choice.0 }}-p" type="radio" name="{{ form.programacao.name }}" value="{{ choice.0 }}">
+                <label for="radio{{ choice.0 }}-p" class="label-avaliacao">
+                    <img class="star star-outline-p" src="{% static 'img/icons/star-outline.svg' %}" alt="">
+                    <img class="star star-filled-p" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+                </label>
+            {% endif %}
+          {% endfor %}
+        </div>  
+      </div>
+
+      <div class="avaliacoes avaliacao-mobile">
+        <h3 class="titulo-avaliacao">Mobile</h3>
+        
+        <div class="estrelas">
+          {% for choice in form.mobile.field.choices %}
+            {% if choice.0 >= 1 and choice.0 <= 5 %}
+                <input class="radio-avaliacao" id="radio{{ choice.0 }}-m" type="radio" name="{{ form.mobile.name }}" value="{{ choice.0 }}">
+                <label for="radio{{ choice.0 }}-m" class="label-avaliacao">
+                    <img class="star star-outline-m" src="{% static 'img/icons/star-outline.svg' %}" alt="">
+                    <img class="star star-filled-m" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+                </label>
+            {% endif %}
+          {% endfor %}
+        </div>  
+      </div>
+    </section>
+
+    <section class="avaliacao-geral">
+      <h2 class="titulo-categoria-avaliacao">Avaliação Geral</h2>
+
+      <div class="avaliacoes avaliacao-facilidade-navegacao">
+        <h3 class="titulo-avaliacao">Facilidade de Navegação</h3>
+
+        <div class="estrelas">
+          {% for choice in form.facilidade_navegacao.field.choices %}
+            {% if choice.0 >= 1 and choice.0 <= 5 %}
+                <input class="radio-avaliacao" id="radio{{ choice.0 }}-f" type="radio" name="{{ form.facilidade_navegacao.name }}" value="{{ choice.0 }}">
+                <label for="radio{{ choice.0 }}-f" class="label-avaliacao">
+                    <img class="star star-outline-f" src="{% static 'img/icons/star-outline.svg' %}" alt="">
+                    <img class="star star-filled-f" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+                </label>
+            {% endif %}
+          {% endfor %}
+        </div>  
+      </div>
+
+      <div class="avaliacoes avaliacao-qualidade-conteudo">
+        <h3 class="titulo-avaliacao">Qualidade do Conteúdo</h3>
+
+        <div class="estrelas">
+          {% for choice in form.qualidade_conteudo.field.choices %}
+            {% if choice.0 >= 1 and choice.0 <= 5 %}
+                <input class="radio-avaliacao" id="radio{{ choice.0 }}-q" type="radio" name="{{ form.qualidade_conteudo.name }}" value="{{ choice.0 }}">
+                <label for="radio{{ choice.0 }}-q" class="label-avaliacao">
+                    <img class="star star-outline-q" src="{% static 'img/icons/star-outline.svg' %}" alt="">
+                    <img class="star star-filled-q" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+                </label>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <button type="submit" class="botao-confirmar-avaliacao">Avaliar</button>
+  </form>
+
+  <section class="media-avaliacoes">
+    <h2 class="titulo-principal-avaliacao">Médias das Avaliações</h2>
+
+    <ul class="lista-media-avaliacoes">
+      <li>
+        Design: {{ medias.media_design|default_if_none:"5.0"|floatformat:1 }}
+        <img class="estrela-media" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+      </li>
+
+      <li>
+        Frontend: {{ medias.media_frontend|default_if_none:"5.0"|floatformat:1 }}
+        <img class="estrela-media" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+      </li>
+
+      <li>
+        Backend: {{ medias.media_backend|default_if_none:"5.0"|floatformat:1 }}
+        <img class="estrela-media" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+      </li>
+
+      <li>
+        Programação: {{ medias.media_programacao|default_if_none:"5.0"|floatformat:1 }}
+        <img class="estrela-media" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+      </li>
+
+      <li>
+        Mobile: {{ medias.media_mobile|default_if_none:"5.0"|floatformat:1 }}
+        <img class="estrela-media" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+      </li>
+
+      <li>
+        Facilidade de Navegação: {{ medias.media_facilidade_navegacao|default_if_none:"5.0"|floatformat:1 }}
+        <img class="estrela-media" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+      </li>
+
+      <li>
+        Qualidade do Conteúdo: {{ medias.media_qualidade_conteudo|default_if_none:"5.0"|floatformat:1 }}
+        <img class="estrela-media" src="{% static 'img/icons/star-filled.svg' %}" alt="">
+      </li>
+    </ul>
+  </section>
+</div>
+
+<script src="{% static 'js/avaliacao.js' %}"></script>
+{% endblock %}

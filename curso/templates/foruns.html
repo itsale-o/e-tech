@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block titulo %}
+Fóruns
+{% endblock %}
+
+{% block content %}
+<div class="not-centered-main-div forum-main-div">
+    <header class="header-forum">
+        <h1>Bem-vindo ao fórum de discussão da E-tech</h1>
+        <p>Inicie uma nova discussão, acompanhe e interaja com outras discussões</p>
+    </header>
+
+    <section class="ver-discussoes">
+        {% for post in posts %}
+        <div class="discussao">
+            <div class="header-discussao">
+                <p class="titulo-discussao">{{ post.titulo }} - {{ post.curso }}</p>
+                <p class="autor-discussao">Publicado em  <span class="span-data-discusao">{{ post.data_postagem|date:"d/m/Y" }}</span> por <span class="span-autor-discussao">{{ post.autor.username }}</span></p>
+            </div>
+
+            <div class="content-discussao">                
+                <p class="post-discussao">{{ post.conteudo }}</p>
+            </div>
+
+            <div class="botoes-interacao">
+                <a class="btn btn-interagir" href="{% url 'curso:detalhes_post' post.pk %}">Interagir</a>
+
+                {% if post.autor == request.user %}
+                    <a class="btn btn-apagar" href="{% url 'curso:excluir_post' post.pk %}">Apagar Discussão</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <section class="secao-criar-discussao">
+        <h3>Inicie uma nova discussão</h3>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="selecionar-curso-div">
+                <label for="id_curso">Selecione um tópico</label>
+
+                <select name="curso" required="" id="id_curso">
+                    <option value="" selected="">---------</option>
+                  
+                    <option value="1">Design Gráfico</option>
+                  
+                    <option value="2">Frontend</option>
+                  
+                    <option value="3">Backend</option>
+                  
+                    <option value="4">Programação</option>
+                  
+                    <option value="5">Mobile</option>
+                  
+                  </select>
+            </div>
+
+            <div class="secao-titulo-post">
+                <label for="id_titulo">Título</label>
+                <input type="text" name="titulo" maxlength="100" required="" id="id_titulo">
+            </div>
+
+            <div class="secao-conteudo-post">
+                <textarea name="conteudo" cols="40" rows="10" required="" id="id_conteudo"></textarea>
+            </div>
+
+            <div class="enviar-post">
+                <input class="enviar-post-btn" type="submit" value="Enviar">
+            </div>
+        </form>
+    </section>
+
+
+</div>
+
+
+
+
+<!--<h2>Create a new post</h2>
+<p>Logged in as: {{ request.user.username }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+<!--<h1>Posts do Fórum</h1>
+<ul>
+    {% for post in posts %}
+    <li>
+        <strong>Curso:</strong> {{ post.curso }}<br>
+        <strong>Título:</strong> {{ post.titulo }}<br>
+        <strong>Conteúdo:</strong> {{ post.conteudo }}<br>
+        <strong>Autor:</strong> {{ post.autor.username }}<br>
+        <strong>Data de Publicação:</strong> {{ post.data_postagem|date:"d/m/Y" }}<br>
+        
+        {% if post.autor == request.user %}
+            <a href="{% url 'curso:excluir_post' post.pk %}">Excluir</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>-->
+{% endblock %}

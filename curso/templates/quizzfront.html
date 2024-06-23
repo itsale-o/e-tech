@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block titulo %}
+Quizz Frontend
+{% endblock %}
+
+{% block content %}
+<div id="quiz-container" class="quiz-container quizz-container-front">
+  <h2 id="question" class="question">Pergunta aqui?</h2>
+
+  <div id="options" class="front-options">
+    <button class="option option-front" onclick="checkAnswer(this)">Opção 1</button>
+    <button class="option option-front" onclick="checkAnswer(this)">Opção 2</button>
+    <button class="option option-front" onclick="checkAnswer(this)">Opção 3</button>
+    <button class="option option-front" onclick="checkAnswer(this)">Opção 4</button>
+  </div>
+  <p id="result" class="result"></p>
+  <button id="next-btn" class="next-front" onclick="nextQuestion()">Próxima</button>
+</div>
+<script>
+const quizData = [
+  {
+    question: "O que CSS significa?",
+    options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets", "Colorful Style Sheets"],
+    correctAnswer: 1
+  },
+  {
+    question: "Qual linguagem é usada para criar a estrutura de uma página web?",
+    options: ["JavaScript", "HTML", "CSS", "Python"],
+    correctAnswer: 1
+  },
+  {
+    question: "Qual é a linguagem de programação mais popular para desenvolvimento web?",
+    options: ["Python", "Java", "C++", "JavaScript"],
+    correctAnswer: 3
+  },
+  {
+    question: "Qual propriedade CSS é usada para alterar a cor do texto?",
+    options: ["color", "background-color", "text-color", "font-color"],
+    correctAnswer: 3
+  },
+  {
+    question: "Qual a opção não é uma estrutura de dados em JavaScript?",
+    options: ["Array", "Object", "Dictionary", "String"],
+    correctAnswer: 2
+  },
+  {
+    question: "Qual é o método JavaScript usado para selecionar um elemento pelo seu ID?",
+    options: ["getElementByClass", "querySelector", "getElementById", "selectElement"],
+    correctAnswer: 2
+  }
+];
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+  const questionElement = document.getElementById("question");
+  const optionsElement = document.getElementById("options");
+  const nextButton = document.getElementById("next-btn");
+  
+  const currentQuizData = quizData[currentQuestion];
+  questionElement.innerText = currentQuizData.question;
+  
+  optionsElement.innerHTML = "";
+  currentQuizData.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.innerText = option;
+    button.classList.add("option");
+    button.setAttribute("onclick", "checkAnswer(this)");
+    optionsElement.appendChild(button);
+  });
+  
+  nextButton.style.display = "none";
+}
+
+function checkAnswer(selectedOption) {
+  const correctIndex = quizData[currentQuestion].correctAnswer;
+  const resultElement = document.getElementById("result");
+  const nextButton = document.getElementById("next-btn");
+  
+  if (selectedOption.textContent === quizData[currentQuestion].options[correctIndex]) {
+    resultElement.textContent = "Resposta correta!";
+    resultElement.style.color = "rgb(27, 171, 5)";
+    score++;
+  } else {
+    resultElement.textContent = "Resposta incorreta!";
+    resultElement.style.color = "rgb(255, 0, 0)";
+  }
+  
+  nextButton.style.display = "block";
+}
+
+function nextQuestion() {
+  const nextButton = document.getElementById("next-btn");
+  const resultElement = document.getElementById("result");
+  
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;
+    loadQuestion();
+    resultElement.textContent = "";
+    nextButton.style.display = "none";
+  } else {
+    const quizContainer = document.getElementById("quiz-container");
+    quizContainer.innerHTML = `<h2>Você completou o quiz!</h2>
+                                <p>Sua pontuação: ${score} de ${quizData.length}</p>`;
+  }
+}
+loadQuestion();
+</script>
+{% endblock %}

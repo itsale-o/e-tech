@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Excluir discussão
+{% endblock %}
+
+{% block content %}
+<div class="not-centered-main-container confirmar-excluir-div">
+    <h2>Você tem certeza de que deseja excluir a discussão <span class="titulo-discussao-excluir">"{{ post.titulo }}"</span>?</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+    </form>
+    
+    <div class="acao-nao-desfeita">
+        <p>ATENÇÃO! Esta ação não pode ser desfeita</p>
+        <img class="icon-atencao" src="{% static 'img/icons/alert-outline.svg' %}" alt="">
+    </div>
+    
+</div>
+{% endblock %}

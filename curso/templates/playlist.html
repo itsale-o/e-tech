@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block titulo %}
+{{ object.nome }}
+{% endblock %}
+
+{% block content %}
+<div class="centered-main-container playlist-container">
+    <h1 class="playlist-nome">{{ object.nome }} - <span>{{ object.canal}}</span></h1>
+    <div class="playlist-div">
+        <div id="main-video-content" class="main-video-content">
+            <iframe class="main-video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <label class="main-info"></label>
+        </div>
+        
+        <div class="playlist">
+            {% for video in object.videos.all %}
+                <div class="playlist-video">
+                    <iframe src="{{ video.link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <label class="playlist-video-info">{{ video.titulo }}</label>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/playlist.js' %}"></script>
+{% endblock %}

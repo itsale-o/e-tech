@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+E-tech
+{% endblock %}
+
+{% block content %}
+<div class="not-centered-main-container resultado-busca">
+    <header class="header-resultado-busca">
+       <h1>Resultados da busca</h1> 
+    </header>
+    
+    <div class="resultado-pesquisa">
+        {% for video in object_list %}
+        <h2>{{ video.titulo }} - {{ video.playlist.nome }}</h2>   
+        <iframe class="video-busca" src="{{ video.link }}"></iframe>
+        <p class="link-acesso-playlist">Se preferir acesse a <a href="{% url 'curso:playlist' video.playlist.pk %}">playlist "{{ video.playlist.nome }}" completa</a></p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

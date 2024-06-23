@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="not-centered-main-container div-logout-principal">
+    <h1>Logout feito com sucesso</h1>
+    
+    <section class="div-logout">
+        <a href="{% url 'curso:login' %}">Fazer Login novamente</a>
+        <a href="/">Voltar para a página inicial</a>
+    </section>
+</div>
+{% endblock %}

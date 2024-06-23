@@ -1,0 +1,68 @@
+{% load static %}
+<nav class="navbar">
+    <a href="/" class="logo-div">
+        <img src="{% static 'img/logo/logo.svg' %}" alt="" class="logo-img">
+        <img src="{% static 'img/logo/fonte.svg' %}" alt="" class="logo-font">
+    </a>
+
+    <div class="botoes-navbar-div">
+        {% if user.is_authenticated %}
+        <a href="{% url 'curso:foruns' %}" class="forum-navbar link-navbar botao-navbar">Fóruns</a>
+
+        <a href="{% url 'curso:quizzes' %}" class="quizzes-navbar link-navbar botao-navbar">Quizzes</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'curso:perfil' %}" class="perfil-navbar link-navbar botao-navbar">Perfil</a>
+        
+        <form method="POST" action="{% url 'curso:logout' %}" class="sair-navbar link-navbar botao-navbar">
+            {% csrf_token %}
+            <input type="submit" value="Sair">
+        </form>        
+        {% else %}      
+        <a href="{% url 'curso:login' %}" class="login-navbar link-navbar botao-navbar">Login</a>
+
+        <a href="{% url 'curso:cadastro' %}" class="cadastro-navbar link-navbar botao-navbar">Cadastre-se</a>
+        {% endif %}
+    </div>
+
+    <div class="menu-navbar-mobile">
+        <img src="{% static 'img/icons/menu-outline.svg' %}" alt="" class="botao-abrir-menu">
+        
+        <div id="menu-lateral" class="hidden">
+            <img src="{% static 'img/icons/close-circle-outline.svg' %}" alt="" class="botao-fechar-menu">
+
+            <ul class="lista-conteudo-menu">
+                <li class="conteudo-menu">
+                    <a href="{% url 'curso:manualusuario' %}">Manual do Usuário</a>
+                </li>
+                <li class="conteudo-menu">
+                    <a href="{% url 'curso:sobrenos' %}">Sobre Nós</a>
+                </li>
+            </ul>
+
+            <div class="botoes-menu-div">
+                {% if user.is_authenticated %}
+                <a href="#" class="link link-forum forum botao">Fóruns</a>
+
+                <a href="{% url 'curso:quizzes' %}" class="link link-quizzes quizzes botao">Quizzes</a>
+                
+                <a href="{% url 'curso:perfil' %}" class="link link-perfil perfil botao">Perfil</a>
+
+                <form method="POST" action="{% url 'curso:logout' %}" class="link link-sair">
+                    {% csrf_token %}
+                    <input type="submit" value="Sair" class="sair botao">
+                </form>
+            </div> 
+            <div class="botoes-menu-div"></div>
+                {% else %}          
+                <a href="{% url 'curso:login' %}" class="link link-login login botao">Login</a>
+
+                <a href="{% url 'curso:cadastro' %}" class="link link-cadastro cadastre-se botao">Cadastre-se</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="black"></div>
+    
+    <script src="{% static 'js/main.js' %}"></script>     
+</nav>

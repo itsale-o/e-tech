@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block titulo %}
+Quizz Programação
+{% endblock %}
+
+{% block content  %}
+<div id="quiz-container" class="quiz-container quizz-container-prog">
+
+  <h2 id="question" class="question">Pergunta aqui?</h2>
+  
+  <div id="options" class="prog-options">
+    <button class="option option-prog" onclick="checkAnswer(this)">Opção 1</button>
+    <button class="option option-prog" onclick="checkAnswer(this)">Opção 2</button>
+    <button class="option option-prog" onclick="checkAnswer(this)">Opção 3</button>
+    <button class="option option-prog" onclick="checkAnswer(this)">Opção 4</button>
+  </div>
+  
+  <p id="result" class="result"></p>
+  
+  <button id="next-btn" class="next-prog" onclick="nextQuestion()">Próxima</button>
+</div>
+
+<script>
+const quizData = [
+  {
+    question: "O que é um algoritmo?",
+    options: ["Um tipo de variável", "Um conjunto de instruções para resolver um problema", "Um operador lógico", "Um tipo de loop"],
+    correctAnswer: 1
+  },
+  {
+    question: "Em que paradigma de programação Python é baseado?",
+    options: ["Orientado a objetos", "Imperativo", "Funcional", "Todos os anteriores"],
+    correctAnswer: 3
+  },
+  {
+    question: "Qual é o método utilizado para iniciar um programa Java?",
+    options: ["main()", "start()", "run()", "init()"],
+    correctAnswer: 0
+  },
+  {
+    question: "O que é um tipo de dados primitivo em C?",
+    options: ["String", "Array", "Float", "Int"],
+    correctAnswer: 3
+  },
+  {
+    question: "Em Python, como você define uma função?",
+    options: ["def", "function", "func", "define"],
+    correctAnswer: 0
+  },
+  {
+    question: "Qual é o operador lógico 'E' em Python?",
+    options: ["and", "or", "not", "&&"],
+    correctAnswer: 0
+  }
+];
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+  const questionElement = document.getElementById("question");
+  const optionsElement = document.getElementById("options");
+  const nextButton = document.getElementById("next-btn");
+  
+  const currentQuizData = quizData[currentQuestion];
+  questionElement.innerText = currentQuizData.question;
+  
+  optionsElement.innerHTML = "";
+  currentQuizData.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.innerText = option;
+    button.classList.add("option");
+    button.setAttribute("onclick", "checkAnswer(this)");
+    optionsElement.appendChild(button);
+  });
+  
+  nextButton.style.display = "none";
+}
+
+function checkAnswer(selectedOption) {
+  const correctIndex = quizData[currentQuestion].correctAnswer;
+  const resultElement = document.getElementById("result");
+  const nextButton = document.getElementById("next-btn");
+  
+  if (selectedOption.textContent === quizData[currentQuestion].options[correctIndex]) {
+    resultElement.textContent = "Resposta correta!";
+    resultElement.style.color = "rgb(27, 171, 5)";
+    score++;
+  } else {
+    resultElement.textContent = "Resposta incorreta!";
+    resultElement.style.color = "rgb(255, 0, 0)";
+  }
+  
+  nextButton.style.display = "block";
+}
+
+function nextQuestion() {
+  const nextButton = document.getElementById("next-btn");
+  const resultElement = document.getElementById("result");
+  
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;
+    loadQuestion();
+    resultElement.textContent = "";
+    nextButton.style.display = "none";
+  } else {
+    const quizContainer = document.getElementById("quiz-container");
+    quizContainer.innerHTML = `<h2>Você completou o quiz!</h2>
+                                <p>Sua pontuação: ${score} de ${quizData.length}</p>`;
+  }
+}
+
+loadQuestion();
+</script>
+{% endblock %}

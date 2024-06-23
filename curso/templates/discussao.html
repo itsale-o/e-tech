@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block titulo %}
+{{ object.titulo }}
+{% endblock %}
+
+{% block content %}
+<div class="not-centered-main-div detalhes-post-main-div">
+    <section class="post-informacao">
+        <h1>{{ object.titulo }}</h1> 
+        <p>{{ object.conteudo }}</p>
+    </section>
+
+    <section class="comentarios">
+        <ul class="lista-comentarios">
+            {% for comentario in comentarios %}
+                <li>
+                    <p class="autor-comentario">{{ comentario.autor.username }}</p>
+                    <p class="data-comentario">Publicado em: {{ comentario.data_comentario|date:"d/m/Y" }}</p>
+                    <p>{{ comentario.comentario }}</p>
+                </li>
+            {% empty %}
+                <li>Ainda não há comentários</li>
+            {% endfor %}
+        </ul>
+    </section>
+    
+    <section class="secao-de-comentaraio">
+        <h1>Deixe um comentário</h1>
+
+        <form class="form-comentario" method="post">
+            {% csrf_token %}
+            <textarea name="comentario" cols="40" rows="10" required="" id="id_comentario"></textarea>
+            <button type="submit">Enviar Comentário</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

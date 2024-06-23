@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block head %}
+<style>
+    #design-perfil{
+        background-image: url("{% static 'img/icons/color-palette-outline.svg' %}");
+    }
+
+    #frontend-perfil{
+        background-image: url("{% static 'img/icons/code-slash-outline.svg' %}"); 
+    }
+
+    #backend-perfil{
+        background-image: url("{% static 'img/icons/document-lock-outline.svg' %}"); 
+    }
+
+    #programacao-perfil{
+        background-image: url("{% static 'img/icons/terminal-outline.svg' %}"); 
+    }
+    
+    #mobile-perfil{
+        background-image: url("{% static 'img/icons/phone-portrait-outline.svg' %}"); 
+    }
+</style>
+{% endblock %}
+
+{% block titulo %}
+Perfil - {{ usuario.username }}
+{% endblock %}
+
+{% block content %}
+<div class="not-centered-main-content container-perfil">
+    <header class="username">
+        <h1>Usuário:</h1>
+        <h2>{{ usuario.username }}</h2>
+    </header>
+
+    <section class="conteudos-acessados-recomendados">
+        <div class="acessados secao-perfil">
+            <h1 class="cursos-acessados-h">Meus Cursos Acessados</h1>
+
+            <div class="curso" id="design-perfil">
+                <h2>Design Gráfico</h2> 
+                <img src="{% static 'img/icons/chevron-down.svg' %}" class="arrow arrow-down">       
+                <img src="{% static 'img/icons/chevron-up.svg' %}" class="arrow arrow-up">
+                
+                <ul class="submodulos" id="subdesign">
+                    {% for playlist in playlists_acessadas %} <!--Todas UL são as representações exemplares de playlists ok?-->         
+                        {% if playlist.curso.titulo == "Design Gráfico" %}
+                            <li>
+                                <a href="{% url 'curso:playlist' playlist.pk %}" class="video">{{ playlist.nome }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %} 
+                </ul>     
+            </div>
+
+            <div class="curso" id="frontend-perfil">
+                <h2>Frontend</h2>
+                <img src="{% static 'img/icons/chevron-down.svg' %}" class="arrow arrow-down">       
+                <img src="{% static 'img/icons/chevron-up.svg' %}" class="arrow arrow-up">
+                
+                <ul class="submodulos" id="subfrontend">
+                    {% for playlist in playlists_acessadas %} <!--Todas UL são as representações exemplares de playlists ok?-->         
+                        {% if playlist.curso.titulo == "Frontend" %}
+                            <li>
+                                <a href="{% url 'curso:playlist' playlist.pk %}" class="video">{{ playlist.nome }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %} 
+                </ul>
+            </div> 
+
+            <div class="curso" id="backend-perfil">
+                <h2>Backend</h2>
+                <img src="{% static 'img/icons/chevron-down.svg' %}" class="arrow arrow-down">       
+                <img src="{% static 'img/icons/chevron-up.svg' %}" class="arrow arrow-up">
+        
+                <ul class="submodulos" id="subbackend">
+                    {% for playlist in playlists_acessadas %} <!--Todas UL são as representações exemplares de playlists ok?-->         
+                        {% if playlist.curso.titulo == "Backend" %}
+                            <li>
+                                <a href="{% url 'curso:playlist' playlist.pk %}" class="video">{{ playlist.nome }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %} 
+                </ul>
+            </div> 
+
+            <div class="curso" id="programacao-perfil">
+                <h2>Programação</h2>
+                <img src="{% static 'img/icons/chevron-down.svg' %}" class="arrow arrow-down">       
+                <img src="{% static 'img/icons/chevron-up.svg' %}" class="arrow arrow-up">
+                
+                <ul class="submodulos" id="subprogramacao">
+                    {% for playlist in playlists_acessadas %} <!--Todas UL são as representações exemplares de playlists ok?-->         
+                        {% if playlist.curso.titulo == "Programação" %}
+                            <li>
+                                <a href="{% url 'curso:playlist' playlist.pk %}" class="video">{{ playlist.nome }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %} 
+                </ul>
+            </div>
+
+            <div class="curso" id="mobile-perfil">
+                <h2>Mobile</h2>
+                <img src="{% static 'img/icons/chevron-down.svg' %}" class="arrow arrow-down">       
+                <img src="{% static 'img/icons/chevron-up.svg' %}" class="arrow arrow-up">
+        
+                <ul class="submodulos" id="submobile">
+                    {% for playlist in playlists_acessadas %} <!--Todas UL são as representações exemplares de playlists ok?-->         
+                        {% if playlist.curso.titulo == "Mobile" %}
+                            <li>
+                                <a href="{% url 'curso:playlist' playlist.pk %}" class="video">{{ playlist.nome }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %} 
+                </ul>
+            </div>
+        </div>
+
+        <div class="recomendados secao-perfil">
+            <h1 class="cursos-acessados-h">Conteúdos Recomendados</h1>
+    
+            <div class="conteudos-recomendados">
+                {% if playlists_recomendadas %}
+                    {% for playlist in playlists_recomendadas %}
+                        {% if playlist.curso.titulo == "Design Gráfico" %}
+                        <a href="{% url 'curso:playlist' playlist.pk %}" class="playlist-recomendada recom-des"> 
+                            <img class="icon-recomendacao" src="{% static 'img/icons/color-palette-outline.svg' %}" alt="">      
+                            {{ playlist.nome }}
+                        </a>
+                        {% endif %}
+
+                        {% if playlist.curso.titulo == "Frontend" %}
+                        <a href="{% url 'curso:playlist' playlist.pk %}" class="playlist-recomendada recom-front">       
+                            <img class="icon-recomendacao" src="{% static 'img/icons/code-slash-outline.svg' %}" alt="">
+                            {{ playlist.nome }}
+                        </a>
+                        {% endif %}
+
+                        {% if playlist.curso.titulo == "Backend" %}
+                        <a href="{% url 'curso:playlist' playlist.pk %}" class="playlist-recomendada recom-back">       
+                            <img class="icon-recomendacao" src="{% static 'img/icons/document-lock-outline.svg' %}" alt="">
+                            {{ playlist.nome }}
+                        </a>
+                        {% endif %}
+
+                        {% if playlist.curso.titulo == "Programação" %}
+                        <a href="{% url 'curso:playlist' playlist.pk %}" class="playlist-recomendada recom-prog">       
+                            <img class="icon-recomendacao" src="{% static 'img/icons/terminal-outline.svg' %}" alt="">
+                            {{ playlist.nome }}
+                        </a>
+                        {% endif %}
+
+                        {% if playlist.curso.titulo == "Mobile" %}
+                        <a href="{% url 'curso:playlist' playlist.pk %}" class="playlist-recomendada recom-mob">       
+                            <img class="icon-recomendacao" src="{% static 'img/icons/phone-portrait-outline.svg' %}" alt="">
+                            {{ playlist.nome }}
+                        </a>
+                        {% endif %}
+                    {% endfor %}            
+                {% else %}
+                <p>Parece que você já conferiu todos os nossos conteúdos. Por enquanto não há mais nada para assistir</p>
+                {% endif %}
+            </div>
+        </div>  
+
+        
+    </section> 
+</div>
+<section class="sistema-avaliacao">
+    <a href="{% url 'curso:avaliacao' %}">Avalie a sua experiência no nosso site</a>
+</section>
+
+<script src="{% static 'js/perfil.js' %}"></script>
+{% endblock %}

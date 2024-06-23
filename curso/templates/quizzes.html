@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block titulo %}
+Quizzes
+{% endblock %}
+
+{% block content %}
+<div class="centered-main-container">
+    <header class="header-quizzes">
+        <h1>Escolha um conteúdo para começar</h1>
+    </header>
+
+    <section class="escolher-quizzes">
+        <ul class="lista-quizzes">
+            <a class="quizz quizz-design" href="{% url 'curso:quizzdesign' %}">Design Gráfico</a>
+            
+            <a class="quizz quizz-front" href="{% url 'curso:quizzfront' %}">Frontend</a>
+
+            <a class="quizz quizz-back" href="{% url 'curso:quizzback' %}">Backend</a>
+
+            <a class="quizz quizz-programacao" href="{% url 'curso:quizzprog' %}">Programação</a>
+
+            <a class="quizz quizz-mobile" href="{% url 'curso:quizzmobile' %}">Mobile</a>
+        </ul>
+    </section>
+</div>
+{% endblock %}

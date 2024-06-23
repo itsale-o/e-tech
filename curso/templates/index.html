@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block titulo %}
+E-tech
+{% endblock %}
+
+{% block content %}
+<div class="centered-main-container">
+    <header class="header-home">
+        {% if user.is_authenticated %}
+        <h1>Bem-vindo a E-Tech</h1>
+        <p>Escolha uma categoria para começar a aprender</p>
+        {% else %}
+        <h1>Bem-vindo a E-Tech</h1>
+        <p>
+            <!--Uma plataforma que reúne e disponibiliza os melhores conteúdos didáticos sobre tecnologia-->
+            <a class="link-header" href="{% url 'curso:cadastro' %}">Cadastre-se</a> ou
+            <a class="link-header" href="{% url 'curso:login' %}">faça login</a> para ter acesso aos conteúdos
+        </p>
+        {% endif %}
+
+        <form method="get" action="{% url 'curso:pesquisavideo' %}" class="barra-busca-div">
+            <input type="search" name="query" id="barra-busca-home" placeholder="Busque por um conteúdo...">
+            <input class="search-button" type="submit" value="">
+        </form> 
+    </header>
+
+    <section id="categoria-cursos">
+        <a href="{% url 'curso:detalhescurso' 1 %}" class="link-curso margin-right-metade margin-right-mobile">
+            <div id="design-grafico" class="card-curso">
+                <p class="title">Design Gráfico</p>
+                <img class="icon" src="{% static 'img/icons/color-palette-outline.svg' %}" alt="">
+                <p class="conteudo">
+                    Photoshop, Illustrator, UX & UI
+                </p>
+            </div>
+        </a>
+
+        <a href="{% url 'curso:detalhescurso' 2 %}" class="link-curso margin-right-metade margin-left-metade margin-left-mobile">
+            <div id="frontend" class="card-curso">
+                <p class="title">Frontend</p>
+                <img class="icon" src="{% static 'img/icons/code-slash-outline.svg' %}" alt="">
+                <p class="conteudo">
+                    HTML & CSS, JavaScript, React
+                </p>
+            </div>  
+        </a> 
+
+        <a href="{% url 'curso:detalhescurso' 3 %}" class="link-curso margin-left-metade margin-right-mobile">  
+            <div id="backend" class="card-curso">
+                <p class="title">Backend</p>
+                <img class="icon" src="{% static 'img/icons/document-lock-outline.svg' %}" alt="">
+                <p class="conteudo">
+                    Banco de Dados
+                </p>
+            </div>
+        </a>
+
+        <a href="{% url 'curso:detalhescurso' 4 %}" class="link-curso margin-right-metade margin-left-mobile">
+            <div id="programacao" class="card-curso">
+                <p class="title">Programação</p>
+                <img class="icon" src="{% static 'img/icons/terminal-outline.svg' %}" alt="">
+                <p class="conteudo">
+                    Lógica de programação, Java, Python, C
+                </p>
+            </div>
+        </a>
+
+        <a href="{% url 'curso:detalhescurso' 5 %}" class="link-curso margin-left-metade">
+            <div id="mobile" class="card-curso">
+                <p class="title">Mobile</p>
+                <img class="icon" src="{% static 'img/icons/phone-portrait-outline.svg' %}">
+                <p class="conteudo">Flutter, React Native</p>
+            </div>
+        </a>
+    </section>
+</div>
+    
+<footer>
+    <a class="link-sobre-nos-footer link-footer" href="{% url 'curso:sobrenos' %}" >Sobre Nós</a>
+    <a class="link-manual-footer link-footer" href="{% url 'curso:manualusuario' %}">Manual do Usuário</a>
+    <!--<a class="link-avalie-footer link-footer" href="" >Avalie nosso site</a>-->
+</footer>
+{% endblock %}

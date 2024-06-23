@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block titulo %}
+{{ object.titulo }}
+{% endblock %}
+
+{% block content %}
+<div class="not-centered-main-container container-cursos">
+    <header class="header-secao">
+        <h1>Confira nossos conteúdo de {{ object.titulo }}</h1>
+    </header>
+        
+    {% if object.titulo == 'Design Gráfico'%}
+    <section class="secao-playlists playlists-design">
+        <a href="{% url 'curso:playlist' 1 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Photoshop Para Iniciantes</p> 
+            <p class="info-canal">Genial Cursos</p>  
+        </a>
+
+        <a href="{% url 'curso:playlist' 24 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Photoshop CC</p>
+            <p class="info-canal">Curso em Vídeo</p>
+        </a>
+        
+        <a href="{% url 'curso:playlist' 2 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso Completo Illustrator</p>
+            <p class="info-canal">Matheus Penteado</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 25 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Illustrator Avançado</p>
+            <p class="info-canal">Illustrator Fácil com Cristiano Lopes</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 10 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de UX Design Gratuito</p>
+            <p class="info-canal">Chief of Design</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 11 %}" class="playlist-item">
+            <p class="titulo-playlist">Princípios e Fundamentos de UI Design</p>
+            <p class="info-canal">Chief of Design</p>
+        </a>
+    </section>
+    {% endif %}
+
+    {% if object.titulo == 'Frontend'%}
+    <section class="secao-playlists playlists-frontend">
+        <a href="{% url 'curso:playlist' 3 %}" class="playlist-item">
+            <p class="titulo-playlist">Front-End</p>
+            <p class="info-canal">Rafaella Ballerini</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 27 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de HTML Completo</p>
+            <p class="info-canal">Programação Web</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 26 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de HTML e CSS Gratuito</p>
+            <p class="info-canal">Otávio Miranda</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 4 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Javascript Completo</p>
+            <p class="info-canal">Programação Web</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 5 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de JavaScript</p>
+            <p class="info-canal">Matheus Battisti - Hora de Codar</p>
+        </a>
+    </section>
+    {% endif %}
+
+    {% if object.titulo == 'Backend'%}
+    <section class="secao-playlists playlists-backend">
+        <a href="{% url 'curso:playlist' 13 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Banco de Dados MySQL</p>
+            <p class="info-canal">Curso em Vídeo</p>
+        </a>
+
+        
+        <a href="{% url 'curso:playlist' 14 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Banco de Dados Oracle Learning SQL</p>
+            <p class="info-canal">Drisantos Geek</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 15 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Access - Criando Banco de Dados</p>
+            <p class="info-canal">Portal Hugo Cursos</p>
+        </a>
+    </section>
+    {% endif %}
+
+    {% if object.titulo == 'Programação'%}
+    <section class="secao-playlists playlists-programacao">
+        <a href="{% url 'curso:playlist' 16 %}" class="playlist-item">
+            <p class="titulo-playlist">Algoritmos e Lógica de Programação</p>
+            <p class="info-canal">Professor Edson Maia</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 17 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Lógica de Programação</p>
+            <p class="info-canal">Curso em Vídeo</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 19 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Java para Iniciantes</p>
+            <p class="info-canal">Curso em Vídeo</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 18 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Java</p>
+            <p class="info-canal">Tiago Aguiar</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 20 %}" class="playlist-item">
+            <p class="titulo-playlist">Fundamentos em Python</p>
+            <p class="info-canal">Balaio Científico</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 21 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso Básico de Python 2024</p>
+            <p class="info-canal">Hashtag Programação</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 22 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de programação com a Linguagem C para iniciantes</p>
+            <p class="info-canal">Professor José de Assis</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 23 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de Linguagem C para Iniciantes</p>
+            <p class="info-canal">One Day Code - Game Dev</p>
+        </a>
+    </section>
+    {% endif %}
+
+    {% if object.titulo == 'Mobile'%}
+    <section class="secao-playlists playlists-mobile">
+        <a href="{% url 'curso:playlist' 6 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso COMPLETO de Flutter</p>
+            <p class="info-canal">Flutterando TV</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 7 %}" class="playlist-item">
+            <p class="titulo-playlist">Flutter Completo 2023</p>
+            <p class="info-canal">Deivid Willyan | Flutter</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 8 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso React Native (aprendiz)</p>
+            <p class="info-canal">One Bit Code</p>
+        </a>
+
+        <a href="{% url 'curso:playlist' 9 %}" class="playlist-item">
+            <p class="titulo-playlist">Curso de React Native + Expo</p>
+            <p class="info-canal">Jovem Programador</p>
+        </a>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

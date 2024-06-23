@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="centered-main-container">
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        <div class="form-header">
+            <div class="title">
+                <h1>Faça seu Login</h1>
+            </div>
+        </div>
+
+        <!--{{ form.username.label }}
+        {{ form.username }}-->
+
+        <div class="input-email input-div">
+            <label for="">Nome de Usuário</label>  
+            <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+        </div>
+        
+        <div class="input-senha input-div">
+            <label for="">Senha</label>
+            <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+        </div>
+
+        {% if messages %}
+        <div class="erros-login">
+            {% for message in messages %}
+                <span class="error-login">{{ message }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="botao-input">
+            <input id="botao-logar" type="submit" value="Entrar">
+            <p>Ainda não tem cadastro? <a class="link-login-cadastro" href="{% url 'curso:cadastro' %}">Clique aqui</a></p> 
+        </div> 
+    </form>
+</div>
+<!--{{ form }}-->
+
+<!--<div class="form-header">
+    <div class="title">
+        <h1>Faça seu Login</h1>
+    </div>
+</div>
+<form action="" method="post" class="form">
+    {% csrf_token %}
+
+    <div class="input-group">
+        <div class="input-box">
+            <label for="">E-mail</label>
+            <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+            <span class="login-vazio span-erro">Campo Obrigatório</span>
+        </div>
+        
+        <div class="input-box">
+            <label for="">Senha</label>
+            <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+            <span class="senha-vazio span-erro">Campo Obrigatório</span>
+        </div>             
+    </div>
+    
+    <div class="login-button">
+               
+        <p>Ainda não tem cadastro? <a class="link-login-cadastro" href="">Clique aqui</a></p> 
+    </div>
+    <input id="botao-logar" type="submit" value="Entrar">
+</form>-->
+
+
+{% endblock %}

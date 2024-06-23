@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block titulo %}
+Quizz Mobile
+{% endblock %}
+
+{% block content %}
+<div id="quiz-container" class="quiz-container quizz-container-mobile">
+  <h2 id="question" class="question">Pergunta aqui?</h2>
+
+  <div id="options" class="mobile-options">
+    <button class="option" onclick="checkAnswer(this)">Opção 1</button>
+    <button class="option" onclick="checkAnswer(this)">Opção 2</button>
+    <button class="option" onclick="checkAnswer(this)">Opção 3</button>
+    <button class="option" onclick="checkAnswer(this)">Opção 4</button>
+  </div>
+  <p id="result" class="result"></p>
+  <button id="next-btn" class="next-mobile" onclick="nextQuestion()">Próxima</button>
+</div>
+  <script>
+  const quizData = [
+    {
+      question: "Qual é o principal objetivo do desenvolvimento mobile?",
+      options: ["Criar jogos para dispositivos móveis", "Desenvolver aplicativos para computadores", "Criar aplicativos para smartphones e tablets", "Gerenciar servidores em nuvem"],
+      correctAnswer: 2
+    },
+    {
+      question: "Qual framework é usado para desenvolvimento de aplicativos móveis com a linguagem Dart?",
+      options: ["Flutter", "React Native", "Swift", "Ionic"],
+      correctAnswer: 0
+    },
+    {
+      question: "Quais são as linguagens de programação usadas no React Native?",
+      options: ["JavaScript e Swift", "JavaScript e Dart", "JavaScript e Java", "JavaScript e Kotlin"],
+      correctAnswer: 0
+    },
+    {
+      question: "Qual é a principal diferença entre Flutter e React Native?",
+      options: ["Flutter é desenvolvido pela Google e React Native é desenvolvido pelo Facebook", "Flutter é baseado em JavaScript e React Native é baseado em Dart", "Flutter é multiplataforma e React Native é exclusivo para Android", "Flutter é uma extensão do Android Studio e React Native é uma extensão do Visual Studio Code"],
+      correctAnswer: 0
+    },
+    {
+      question: "Qual é o componente básico de interface do usuário em React Native?",
+      options: ["Widget", "Componente", "View", "Layout"],
+      correctAnswer: 2
+    },
+    {
+      question: "Qual framework JavaScript é usado para desenvolver aplicativos móveis com React Native?",
+      options: ["Angular", "Vue.js", "React.js", "Ember.js"],
+      correctAnswer: 2
+    }
+  ];
+  let currentQuestion = 0;
+  let score = 0;
+  
+  function loadQuestion() {
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    const nextButton = document.getElementById("next-btn");
+    
+    const currentQuizData = quizData[currentQuestion];
+    questionElement.innerText = currentQuizData.question;
+    
+    optionsElement.innerHTML = "";
+    currentQuizData.options.forEach((option, index) => {
+      const button = document.createElement("button");
+      button.innerText = option;
+      button.classList.add("option");
+      button.setAttribute("onclick", "checkAnswer(this)");
+      optionsElement.appendChild(button);
+    });
+    
+    nextButton.style.display = "none";
+  }
+  
+  function checkAnswer(selectedOption) {
+    const correctIndex = quizData[currentQuestion].correctAnswer;
+    const resultElement = document.getElementById("result");
+    const nextButton = document.getElementById("next-btn");
+    
+    if (selectedOption.textContent === quizData[currentQuestion].options[correctIndex]) {
+      resultElement.textContent = "Resposta correta!";
+      resultElement.style.color = "rgb(27, 171, 5)";
+      score++;
+    } else {
+      resultElement.textContent = "Resposta incorreta!";
+      resultElement.style.color = "rgb(255, 0, 0)";
+    }
+    
+    nextButton.style.display = "block";
+  }
+  
+  function nextQuestion() {
+    const nextButton = document.getElementById("next-btn");
+    const resultElement = document.getElementById("result");
+    
+    if (currentQuestion < quizData.length - 1) {
+      currentQuestion++;
+      loadQuestion();
+      resultElement.textContent = "";
+      nextButton.style.display = "none";
+    } else {
+      const quizContainer = document.getElementById("quiz-container");
+      quizContainer.innerHTML = `<h2>Você completou o quiz!</h2>
+                                  <p>Sua pontuação é: ${score} de ${quizData.length}</p>`;
+    }
+  }
+  
+  loadQuestion();
+  </script>
+  
+
+{% endblock %}

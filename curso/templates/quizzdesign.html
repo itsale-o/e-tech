@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block titulo %}
+Quizz Design Gráfico
+{% endblock %}
+
+{% block content %}
+<div id="quiz-container" class="quiz-container quizz-container-design">
+
+  <h2 id="question" class="question">Pergunta aqui?</h2>
+
+  <div id="options" class="design-options">
+    <button class="option option-design" onclick="checkAnswer(this)">Opção 1</button>
+    <button class="option option-design" onclick="checkAnswer(this)">Opção 2</button>
+    <button class="option option-design" onclick="checkAnswer(this)">Opção 3</button>
+    <button class="option option-design" onclick="checkAnswer(this)">Opção 4</button>
+  </div>
+
+  <p id="result" class="result"></p>
+
+  <button id="next-btn" class="next-design" onclick="nextQuestion()">Próxima</button>
+</div>
+<script>
+const quizData = [
+  {
+    question: "Qual é o princípio básico de design que se refere à relação entre elementos visuais em um layout?",
+    options: ["Contraste", "Repetição", "Alinhamento", "Proximidade"],
+    correctAnswer: 3
+  },
+  {
+    question: "Que tipo de cores são o vermelho, o amarelo e o azul no círculo cromático?",
+    options: ["Cores primárias", "Cores secundárias", "Cores complementares", "Cores analógicas"],
+    correctAnswer: 0
+  },
+  {
+    question: "Qual termo se refere à forma como um tipo de letra é estilizado?",
+    options: ["Kerning", "Tracking", "Leading", "Typography"],
+    correctAnswer: 3
+  },
+  {
+    question: "Qual é a técnica de design que cria a ilusão de profundidade em uma imagem bidimensional?",
+    options: ["Sombreamento", "Texturização", "Perspectiva", "Opacidade"],
+    correctAnswer: 2
+  },
+  {
+    question: "Qual é o nome dado ao espaçamento entre as letras de um texto?",
+    options: ["Kerning", "Leading", "Tracking", "Spacing"],
+    correctAnswer: 2
+  },
+  {
+    question: "Qual é a técnica de design que usa repetição de elementos para criar padrões visuais?",
+    options: ["Grid", "Pattern", "Alignment", "Symmetry"],
+    correctAnswer: 1
+  }
+];
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+  const questionElement = document.getElementById("question");
+  const optionsElement = document.getElementById("options");
+  const nextButton = document.getElementById("next-btn");
+  
+  const currentQuizData = quizData[currentQuestion];
+  questionElement.innerText = currentQuizData.question;
+  
+  optionsElement.innerHTML = "";
+  currentQuizData.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.innerText = option;
+    button.classList.add("option");
+    button.setAttribute("onclick", "checkAnswer(this)");
+    optionsElement.appendChild(button);
+  });
+  
+  nextButton.style.display = "none";
+}
+
+function checkAnswer(selectedOption) {
+  const correctIndex = quizData[currentQuestion].correctAnswer;
+  const resultElement = document.getElementById("result");
+  const nextButton = document.getElementById("next-btn");
+  
+  if (selectedOption.textContent === quizData[currentQuestion].options[correctIndex]) {
+    resultElement.textContent = "Resposta correta!";
+    resultElement.style.color = "rgb(27, 171, 5)";
+    score++;
+  } else {
+    resultElement.textContent = "Resposta incorreta!";
+    resultElement.style.color = "rgb(255, 0, 0)";
+  }
+  
+  nextButton.style.display = "block";
+}
+
+function nextQuestion() {
+  const nextButton = document.getElementById("next-btn");
+  const resultElement = document.getElementById("result");
+  
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;
+    loadQuestion();
+    resultElement.textContent = "";
+    nextButton.style.display = "none";
+  } else {
+    const quizContainer = document.getElementById("quiz-container");
+    quizContainer.innerHTML = `<h2>Você completou o quiz!</h2>
+                                <p>Sua pontuação: ${score} de ${quizData.length}</p>`;
+  }
+}
+loadQuestion();
+</script>
+{% endblock %}

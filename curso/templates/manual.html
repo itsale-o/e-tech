@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block titulo %}
+    Manual do Usuário
+{% endblock %}
+
+{% block content %}
+<div class="centered-main-container">
+    <h1>Manual do Usuário</h1>
+    <div class="swiper-container">
+        <button class="arrow-left control" aria-label="Previous image">
+            <img src="{% static 'img/icons/chevron-back-outline.svg' %}" alt="">
+        </button>
+    
+        <button class="arrow-right control" aria-label="Next image">
+            <img src="{% static 'img/icons/chevron-forward-outline.svg' %}" alt="">
+        </button>
+        
+        <div class="gallery-wrapper">
+            <div class="gallery">
+                <img src="{% static 'img/manual/cadastro.png' %}" alt="Tela 1" class="item current-item">
+                
+                <img src="{% static 'img/manual/login.png' %}" alt="Tela 2" class="item">
+
+                <img src="{% static 'img/manual/esolha_conteudos.png' %}" alt="Tela 3" class="item">
+    
+                <img src="{% static 'img/manual/pesquisa.png' %}" alt="Tela 4" class="item">
+    
+                <img src="{% static 'img/manual/foruns.png' %}" alt="Tela 5" class="item">
+    
+                <img src="{% static 'img/manual/quizzes.png' %}" alt="Tela 6" class="item">
+    
+                <img src="{% static 'img/manual/perfil.png' %}" alt="Tela 7" class="item">
+
+                <img src="{% static 'img/manual/avaliacao.png' %}" alt="Tela 8" class="item">
+            </div>
+        </div> 
+    </div>   
+</div>
+
+<script src="{% static 'js/manual.js' %}"></script>
+{% endblock %}

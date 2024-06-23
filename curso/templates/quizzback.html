@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block titulo %}
+Quizz Backend
+{% endblock %}
+
+{% block content %}
+<div id="quiz-container" class="quiz-container quizz-container-back">
+
+  <h2 id="question" class="question">Pergunta aqui?</h2>
+  
+  <div id="options" class="back-options">
+    <button class="option option-back" onclick="checkAnswer(this)">Opção 1</button>
+    <button class="option option-back" onclick="checkAnswer(this)">Opção 2</button>
+    <button class="option option-back" onclick="checkAnswer(this)">Opção 3</button>
+    <button class="option option-back" onclick="checkAnswer(this)">Opção 4</button>
+  </div>
+  
+  <p id="result" class="result"></p>
+  
+  <button id="next-btn" class="next-back" onclick="nextQuestion()">Próxima</button>
+</div>
+<script>
+  const quizData = [
+    {
+      question: "Qual é o principal objetivo do back-end em uma aplicação web?",
+      options: ["Estilizar a interface do usuário", "Gerenciar a interação do usuário", "Processar e armazenar dados", "Criar animações e efeitos visuais"],
+      correctAnswer: 2
+    },
+    {
+      question: "Qual linguagem de programação é comumente usada para desenvolvimento de back-end?",
+      options: ["HTML", "CSS", "JavaScript", "Python"],
+      correctAnswer: 3
+    },
+    {
+      question: "O que é um banco de dados?",
+      options: ["Um servidor de e-mail", "Um conjunto de páginas web", "Um sistema para armazenar e gerenciar dados", "Um programa de edição de imagens"],
+      correctAnswer: 2
+    },
+    {
+      question: "Qual é o protocolo comumente usado para comunicação entre o cliente e o servidor na web?",
+      options: ["FTP", "SSH", "HTTP", "SMTP"],
+      correctAnswer: 2
+    },
+    {
+      question: "O que é uma API?",
+      options: ["Um padrão de design de interface do usuário", "Uma linguagem de programação", "Um protocolo de comunicação entre servidores", "Um conjunto de regras e padrões para acessar e interagir com um software ou sistema"],
+      correctAnswer: 3
+    },
+    {
+      question: "Qual é o principal objetivo de um servidor web?",
+      options: ["Armazenar arquivos de áudio e vídeo", "Processar solicitações HTTP e fornecer conteúdo para clientes", "Enviar e receber e-mails", "Executar cálculos complexos"],
+      correctAnswer: 1
+    }
+  ];
+  let currentQuestion = 0;
+  let score = 0;
+  
+  function loadQuestion() {
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    const nextButton = document.getElementById("next-btn");
+    
+    const currentQuizData = quizData[currentQuestion];
+    questionElement.innerText = currentQuizData.question;
+    
+    optionsElement.innerHTML = "";
+    currentQuizData.options.forEach((option, index) => {
+      const button = document.createElement("button");
+      button.innerText = option;
+      button.classList.add("option");
+      button.setAttribute("onclick", "checkAnswer(this)");
+      optionsElement.appendChild(button);
+    });
+    
+    nextButton.style.display = "none";
+  }
+  
+  function checkAnswer(selectedOption) {
+    const correctIndex = quizData[currentQuestion].correctAnswer;
+    const resultElement = document.getElementById("result");
+    const nextButton = document.getElementById("next-btn");
+    
+    if (selectedOption.textContent === quizData[currentQuestion].options[correctIndex]) {
+      resultElement.textContent = "Resposta correta!";
+      resultElement.style.color = "rgb(27, 171, 5)";
+      score++;
+    } else {
+      resultElement.textContent = "Resposta incorreta!";
+      resultElement.style.color = "rgb(255, 0, 0)";
+    }
+    
+    nextButton.style.display = "block";
+  }
+  
+  function nextQuestion() {
+    const nextButton = document.getElementById("next-btn");
+    const resultElement = document.getElementById("result");
+    
+    if (currentQuestion < quizData.length - 1) {
+      currentQuestion++;
+      loadQuestion();
+      resultElement.textContent = "";
+      nextButton.style.display = "none";
+    } else {
+      const quizContainer = document.getElementById("quiz-container");
+      quizContainer.innerHTML = `<h2>Você completou o quiz!</h2>
+                                  <p>Sua pontuação: ${score} de ${quizData.length}</p>`;
+    }
+  }
+  
+  loadQuestion();
+</script>
+{% endblock %}
