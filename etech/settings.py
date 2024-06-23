@@ -32,7 +32,7 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://etech.up.railway.app/", 'localhost', '127.0.0.1:8000']
+ALLOWED_HOSTS = ["etech.up.railway.app", 'localhost', '127.0.0.1:8000']
 
 
 # Application definition
