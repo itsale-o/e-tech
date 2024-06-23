@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h+d(lx5r$&76fo*!(fa_sl!$^f6_izhi(g4q@_*4vj9_h^ae+c'
+TOKEN_CSRF = os.getenv('TOKEN_CSRF')
+if TOKEN_CSRF:
+    SECRET_KEY = TOKEN_CSRF
+    CSRF_TRUSTED_ORIGINS = ['https://etech.up.railway.app/']
+else:
+    SECRET_KEY = 'django-insecure-h+d(lx5r$&76fo*!(fa_sl!$^f6_izhi(g4q@_*4vj9_h^ae+c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://etech.up.railway.app/", 'localhost', '127.0.0.1:8000']
 
 
 # Application definition
@@ -81,9 +88,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-import dj_database_url
-import os
 
 DATABASE_URL = 'postgresql://postgres:ORhlHOzTAuEyCMblPGSNqYrPznwExOnk@roundhouse.proxy.rlwy.net:45489/railway'
 if DATABASE_URL:
