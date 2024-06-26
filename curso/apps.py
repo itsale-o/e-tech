@@ -12,6 +12,6 @@ class CursoConfig(AppConfig):
         email = os.getenv("EMAIL_ADMIN")
         senha = os.getenv("SENHA_ADMIN")
 
-        usuarios = Usuario.objects.filter(email=email)
+        usuarios = Usuario.objects.filter(email=email) | Usuario.objects.filter(username='admin')
         if not usuarios:
             Usuario.objects.create_superuser(username='admin', email=email, password=senha, is_active=True, is_staff=True)
