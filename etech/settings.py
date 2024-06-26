@@ -30,7 +30,7 @@ else:
     SECRET_KEY = 'django-insecure-h+d(lx5r$&76fo*!(fa_sl!$^f6_izhi(g4q@_*4vj9_h^ae+c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["etech.up.railway.app", 'localhost', '127.0.0.1:8000']
 

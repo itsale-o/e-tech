@@ -42,7 +42,7 @@
 
             <div class="botoes-menu-div">
                 {% if user.is_authenticated %}
-                <a href="#" class="link link-forum forum botao">Fóruns</a>
+                <a href="{% url 'curso:foruns' %}" class="link link-forum forum botao">Fóruns</a>
 
                 <a href="{% url 'curso:quizzes' %}" class="link link-quizzes quizzes botao">Quizzes</a>
                 
